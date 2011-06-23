@@ -10,6 +10,7 @@ Start a couchpotato process with the url to a database, couchpotato will create 
 
 Once the process is started, to schedule a job you write a document to the database, each job takes a custom job description which you can find documented below, this example will read the google.com homepage every out and save the results to your local database `myscreenscapes`
 
+    POST http://127.0.0.1:5984/couchpotato
     { "worker": "webpage"
     , "ttl": 60 * 60 * 100
     , "opts": {"uri":http://google.com"}
