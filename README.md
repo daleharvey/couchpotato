@@ -33,10 +33,10 @@ There are a few common global attributes you can add to jobs, they are all optio
 
 This is currently the only worker written.
 
-TODO:
- * RSS reader
- * Twitter API reader (problem with oauth?)
- * Github Issues
- * POP / Email Reader
- * Foursquare / Gowalla etc
+## TODO:
+* RSS reader
+* Twitter API reader (problem with oauth?)
+* Github Issues
+* POP / Email Reader
+* Foursquare / Gowalla etc
 
