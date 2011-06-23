@@ -10,11 +10,11 @@ Start a couchpotato process with the url to a database, couchpotato will create 
 
 Once the process is started, to schedule a job you write a document to the database, each job takes a custom job description which you can find documented below, this example will read the google.com homepage every out and save the results to your local database `myscreenscapes`
 
-   { "worker": "webpage"
-   , "ttl": 60 * 60 * 100
-   , "opts": {"uri":http://google.com"}
-   , "destination": "myscreenscrapes"
-   }
+    { "worker": "webpage"
+    , "ttl": 60 * 60 * 100
+    , "opts": {"uri":http://google.com"}
+    , "destination": "myscreenscrapes"
+    }
 
 There are a few common global attributes you can add to jobs, they are all optional
 
@@ -24,11 +24,11 @@ There are a few common global attributes you can add to jobs, they are all optio
 
 ## Screenscrape a webpage
 
-   { "worker": "webpage"
-   , "ttl": 60 * 60 * 100
-   , "opts": {"uri":http://google.com"}
-   , "destination": "myscreenscrapes"
-   }
+    { "worker": "webpage"
+    , "ttl": 60 * 60 * 100
+    , "opts": {"uri":http://google.com"}
+    , "destination": "myscreenscrapes"
+    }
 
 
 This is currently the only worker written.
