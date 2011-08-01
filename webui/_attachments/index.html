@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>CouchPotato</title>
+
+    <style type="text/css">
+      body, p, td { font-size:11px; font-family:sans-serif; }
+      table { border-collapse:collapse; width:100%; }
+      thead { background:#EAF2F5; }
+      td, th { border:1px solid #CCC; padding:3px; }
+      a { cursor:pointer; color:blue; text-decoration:underline; }
+      #add_row, #create_job, .edit_job { display:none; }
+      label { display:block; overflow:auto; padding:5px;}
+      label span {display:block; font-weight:bold; }
+    </style>
+
+  </head>
+
+  <body>
+
+    <div id="node_status">
+      <h2>Node Status</h2>
+      <p id="status">&nbsp;</p>
+    </div>
+
+    <div id="content">
+    </div>
+
+
+    <script type="text/x-handlebars-template" id="tasks_tpl">
+      <h2>Scheduled Jobs</h2>
+      <table cellspacing="0">
+        <thead>
+          <th>Status</th>
+          <th>Id</th>
+          <th>Source</th>
+          <th>Type</th>
+          <th>Target</th>
+          <th>Last Run</th>
+          <th>Next Run</th>
+          <th colspan="2"><a id="show_add_row_btn">+ Add Job</a></th>
+        </thead>
+        <tr id="add_row">
+          <td colspan="9">
+            <form action="#add_row">
+              <label><span>Source</span><input type="text" name="source" /></label>
+              <label><span>Type</span><input type="text" name="type" /></label>
+              <label><span>Target</span><input type="text" name="target" /></label>
+              <label><span>Check Every</span><input type="number" name="ttl" /></label>
+              <input type="submit" value="Add Job" />
+            </form>
+          </td>
+        </tr>
+        {{#plainDocs}}
+        <tr>
+          <td>{{status}}</td>
+          <td>{{_id}}</td>
+          <td>{{source}}</td>
+          <td>{{jobType}}</td>
+          <td>{{target}}</td>
+          <td>{{toDate lastSeen}}</td>
+          <td>{{toDate lastSeen}}</td>
+          <td>
+            <form action="#switch_status">
+              <input type="hidden" name="id" value="{{_id}}" />
+              <input type="hidden" name="rev" value="{{_rev}}" />
+              <input type="submit" value="pause" />
+            </form>
+          </td>
+          <td>
+            <form action="#delete_job">
+              <input type="hidden" name="id" value="{{_id}}" />
+              <input type="hidden" name="rev" value="{{_rev}}" />
+              <input type="submit" value="delete" />
+            </form>
+          </td>
+        </tr>
+        {{/plainDocs}}
+      </table>
+
+      <h2>Job Definitions</h2>
+      <table cellspacing="0">
+        <thead>
+          <th>Name</th>
+          <th>Description</th>
+          <th colspan="2"><a id="create_job_btn">+ Create Job</a></th>
+        </thead>
+        <tr id="create_job">
+          <td colspan="4">
+            <form action="#set_job">
+              <label><span>Name</span><input type="text" name="name" /></label>
+              <label><span>Description</span><input type="text" name="description" /></label>
+              <label><span>Code</span><textarea name="code"></textarea></label>
+              <input type="submit" value="Create Job" />
+            </form>
+          </td>
+        </tr>
+        {{#jobDefinitions}}
+        <tr>
+          <td><a class="job_name">{{name}}</a></td>
+          <td>{{description}}</td>
+          <td>
+            <form action="#delete_job">
+              <input type="hidden" name="name" value="{{name}}" />
+              <input type="submit" value="delete" />
+            </form>
+          </td>
+        </tr>
+        <tr class="edit_job">
+          <td colspan="4">
+            <form action="#set_job">
+              <label><span>Name</span><input type="text" name="name" value="{{name}}"/></label>
+              <label><span>Description</span><input type="text" name="description" value="{{description}}"/></label>
+              <label><span>Code</span><textarea name="code">{{code}}</textarea></label>
+              <input type="submit" value="Save Job" />
+            </form>
+          </td>
+        </tr>
+        {{/jobDefinitions}}
+      </table>
+    </script>
+
+
+    <script src="./js/jquery-1.6.min.js"></script>
+    <script src="./js/jquery.couch.js"></script>
+    <script src="./js/handlebars.1.0.0.beta.3.js"></script>
+    <script src="./js/date.js"></script>
+    <script src="./js/router.js"></script>
+    <script src="./js/couchpotato.js"></script>
+
+  </body>
+
+</html>
